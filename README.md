@@ -1,1 +1,10 @@
-# ldp_icml_2022
+Organization
+```
+simulation/
+image/
+	LP-MST/
+	PATE/
+criteo/
+	LP-MST/
+	PATE/
+  ```
