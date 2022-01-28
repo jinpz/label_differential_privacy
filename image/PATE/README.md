@@ -10,7 +10,7 @@ Most code is adapted from https://github.com/facebookresearch/label_dp_antipodes
 
 ## Training
 
-### PATE
+### PATE-FM
 PATE model is trained in 3 stages. Below are example commands with hyperparameters we used.
 
 #### Stage 1: Train teacher ensemble
