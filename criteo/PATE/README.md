@@ -1,11 +1,10 @@
 This directory contains the following that is used to train PATE on Criteo dataset as seen in Section 5.2:
 
-Most code is adapted from https://github.com/facebookresearch/label_dp_antipodes
 1. ```train_teacher_ctr.py```
 1. ```train_student_ctr.py```
 1. ```lib/```
 
-#############################################
+Most code is adapted from https://github.com/facebookresearch/label_dp_antipodes
 
 ## Training
 

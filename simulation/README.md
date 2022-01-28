@@ -1,7 +1,7 @@
 This directory contains the following that is used for running simulation datasets in Section 5.1:
 1. ```simulation.py```
 
-#############################################
+## Simulation
 
 To run the case for m = 2, σ = 1:
 ```
