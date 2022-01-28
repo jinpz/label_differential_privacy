@@ -34,7 +34,7 @@ parser.add_argument('--algo', default="catboost", type=str,
 parser.add_argument('--seed', default=47, type=int, help='random seed')
 parser.add_argument('--dataset', default="raw_dataset_1M", type=str,
                     help='dataset name')
-parser.add_argument('--data_path', default="../ctr_prediction/", type=str,
+parser.add_argument('--data_path', default="../data/", type=str,
                     help='path to load data')
 parser.add_argument('--save_path', default="results/PATE_ctr/", type=str,
                     help='base path to save checkpoint; algo_n_teachers_seed')

@@ -34,7 +34,7 @@ parser.add_argument('--algo', default="catboost", type=str,
 parser.add_argument('--seed', default=47, type=int, help='random seed')
 parser.add_argument('--dataset', default="raw_dataset_1M", type=str,
                     help='dataset name')
-parser.add_argument('--data_path', default="lp_mst/data/ctr_prediction/", type=str,
+parser.add_argument('--data_path', default="../data/", type=str,
                     help='path to load data')
 parser.add_argument('--model_path', default="results/", type=str,
                     help='base path to load models')
