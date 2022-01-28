@@ -1,4 +1,4 @@
-# Code for LP-MST on Criteo Click-Through Rate prediction dataset
+# Code for LP-MST on Criteo Click-Through Rate Prediction Dataset
 
 ## 1. Dependencies and Data Preparation
 ### 1.1 Dependencies
