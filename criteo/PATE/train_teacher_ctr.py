@@ -21,12 +21,12 @@ import scipy
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import log_loss
 from catboost import CatBoostClassifier
-import xgboost as xgb
 from torch.utils.data import Dataset, DataLoader
 import math
 import torch
 from tqdm import tqdm
 import random
+import logging
 
 parser = argparse.ArgumentParser(description='PyTorch mnist Training')
 parser.add_argument('--algo', default="catboost", type=str,

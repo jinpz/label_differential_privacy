@@ -11,7 +11,6 @@ import csv
 import os
 from copy import deepcopy
 import pickle
-from train_teacher_ctr import partition_dataset_indices
 
 os.environ['KMP_WARNINGS'] = '0'
 
@@ -21,7 +20,6 @@ import scipy
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import log_loss
 from catboost import CatBoostClassifier
-import xgboost as xgb
 from torch.utils.data import Dataset, DataLoader
 import math
 import torch
@@ -36,7 +34,7 @@ parser.add_argument('--dataset', default="raw_dataset_1M", type=str,
                     help='dataset name')
 parser.add_argument('--data_path', default="../data/", type=str,
                     help='path to load data')
-parser.add_argument('--model_path', default="results/", type=str,
+parser.add_argument('--model_path', default="results/PATE_ctr/", type=str,
                     help='base path to load models')
 parser.add_argument('--save_path', default="results/PATE_ctr/", type=str,
                     help='base path to save checkpoint; algo_n_teachers_seed')
@@ -46,15 +44,15 @@ parser.add_argument('--mechanism', default="lnmax", type=str,
                     help='lnmax, gnmax, gnmax_conf')
 parser.add_argument('--n_samples', default=100, type=int,
                     help='# of student samples')
-parser.add_argument('--tally_method', type=str,
+parser.add_argument('--tally_method', default='sample', type=str,
                     help='argmax or sample')
-parser.add_argument('--selection_method', default='argmax', type=str,
+parser.add_argument('--selection_method', default='sample', type=str,
                     help='argmax or sample')
 parser.add_argument('--noise_threshold', default=0, type=float,
                     help='threshold tau')
 parser.add_argument('--selection_noise', default=0, type=float,
                     help='sigma1')
-parser.add_argument('--result_noise', default=0, type=float,
+parser.add_argument('--result_noise', default=20, type=float,
                     help='sigma2')
 args = parser.parse_args()
 

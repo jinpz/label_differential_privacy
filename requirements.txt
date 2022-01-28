@@ -1,6 +1,9 @@
 torch
 torchvision
+scipy
+sklearn
 simple_parsing
 tqdm
 tensorboard
+pandas
 catboost
