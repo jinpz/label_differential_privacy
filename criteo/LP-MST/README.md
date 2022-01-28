@@ -1,4 +1,4 @@
-# Code for LP-MST on MNIST and CIFAR10
+# Code for LP-MST on Criteo Click-Through Rate prediction dataset
 
 ## 1. Dependencies and Data Preparation
 ### 1.1 Dependencies
