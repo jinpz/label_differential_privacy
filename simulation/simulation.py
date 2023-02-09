@@ -18,13 +18,13 @@ def sample_one_vectorized(p):
 
 parser = argparse.ArgumentParser(description='PyTorch mnist Training')
 parser.add_argument('-num_classes', type=int, default=2, help='')
-parser.add_argument('-d', type=int, default=100, help='dimension')
+parser.add_argument('-d', type=int, default=100, help='data dimension')
 parser.add_argument('-N', type=int, default=100, help='number of data points')
-parser.add_argument('-sigma', type=float, default=1, help='std dev')
-parser.add_argument('-eps', type=float, default=0.1, help='')
-parser.add_argument('-repeat_outer', type=int, default=1, help='')
-parser.add_argument('-repeat_inner', type=int, default=1000, help='')
-parser.add_argument('-save_dir', type=str, default='results/', help='')
+parser.add_argument('-sigma', type=float, default=1, help='standard deviation')
+parser.add_argument('-eps', type=float, default=0.1, help='epsilon, privacy budget')
+parser.add_argument('-repeat_outer', type=int, default=1, help='number of repeats sampling training data')
+parser.add_argument('-repeat_inner', type=int, default=1000, help='number of repeats given the same training data')
+parser.add_argument('-save_dir', type=str, default='results/', help='save location')
 args = parser.parse_args()
 
 print(vars(args))
@@ -50,7 +50,7 @@ distributions = []
 for i in range(len(means)):
     distributions.append(multivariate_normal(means[i], cov))
 
-base_benefits = []
+L_EAUs = []
 train_accs = []
 train_dp_accs = []
 for i in tqdm(range(repeat_outer)):
@@ -63,8 +63,8 @@ for i in tqdm(range(repeat_outer)):
     for j in range(num_classes):
         probabilities[:, j] = distributions[j].pdf(train_samples)
     probabilities = probabilities / np.sum(probabilities, axis=1)[:, None]
-    base_benefit = np.mean(np.max(probabilities, axis=1))
-    base_benefits.append(base_benefit)
+    L_EAU = np.mean(np.max(probabilities, axis=1))
+    L_EAUs.append(L_EAU)
     current_train_accs = []
     current_dp_accs = []
     for j in range(repeat_inner):
@@ -85,20 +85,19 @@ for i in tqdm(range(repeat_outer)):
     train_accs.append(current_train_accs)
     train_dp_accs.append(current_dp_accs)
 
-train_acc_mean = np.mean(np.array(train_accs), axis=1)
-print('mean of absolute benefit {0}'.format(np.mean(train_acc_mean)))
-print('mean of base benefit {0}'.format(np.mean(base_benefits)))
+print('mean of label-independent EAU {0}'.format(np.mean(L_EAUs)))
 
-excess_benefit = train_acc_mean - np.array(base_benefits)
+train_accs_mean = np.mean(np.array(train_accs), axis=1)
+advantages = train_accs_mean - np.array(L_EAUs)
 
-print('mean of excess benefit {0}'.format(np.mean(excess_benefit)))
+print('mean of advantage {0}'.format(np.mean(advantages)))
 
-print('upper bound {0}'.format(1 - np.exp(-var_eps)))
+print('upper bound of advantage {0}'.format(1 - 2 / (1 + np.exp(var_eps))))
 
 if not os.path.exists(args.save_dir):
     os.makedirs(args.save_dir)
 
 with open(args.save_dir + 'data.pkl', 'wb') as f:
-    pickle.dump([train_accs, base_benefits, train_dp_accs], f)
+    pickle.dump([train_accs, L_EAUs, train_dp_accs], f)
 
 print('done')
