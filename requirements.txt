@@ -3,7 +3,7 @@ torchvision
 numpy
 scipy
 sklearn
-simple_parsing
+simple-parsing
 tqdm
 tensorboard
 pandas
