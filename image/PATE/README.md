@@ -1,9 +1,4 @@
-This directory contains the following that is used to train PATE-FM on MNIST and CIFAR10 as seen in Section 3.1:
-
-1. ```train_teacher.py```
-1. ```aggregate_votes.py```
-1. ```train_student.py```
-1. ```lib/```
+# Code for PATE-FM on MNIST and CIFAR10
 
 Most code is adapted from https://github.com/facebookresearch/label_dp_antipodes
 

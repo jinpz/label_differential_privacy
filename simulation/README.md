@@ -1,5 +1,4 @@
-This directory contains the following that is used for running simulation datasets in Section 5.1:
-1. ```simulation.py```
+# Simulation Code for Section 5.1
 
 ## Simulation
 
